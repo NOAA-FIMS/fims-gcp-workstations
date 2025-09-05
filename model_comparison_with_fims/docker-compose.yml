@@ -1,0 +1,30 @@
+# docker-compose.yml
+# This file defines a service to run the development environment.
+# It uses the Dockerfile to build the image, mounts the current project
+# directory into the container, and keeps the container running.
+
+version: '3.8'
+
+services:
+  r-dev:
+    # Tells Docker Compose to build the image from the Dockerfile
+    # in the current directory (.)
+    build: .
+    container_name: r_dev_container
+    
+    # Mount the current directory on your host to /workspaces/model-comparison-project in the container.
+    # This allows you to edit files locally and have the changes reflected inside the container.
+    volumes:
+      - .:/workspaces/model-comparison-project
+      
+    # Set the default working directory for the container
+    working_dir: /workspaces/model-comparison-project
+
+    # Forward ports for RStudio Server (8787) and code-server (8080)
+    ports:
+      - "8787:8787"
+      - "8080:8080"
+    
+    # Keeps the container running in the background. You can attach to it with
+    # 'docker exec -it r_dev_container bash' or by using the VS Code Docker extension.
+    command: sleep infinity

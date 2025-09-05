@@ -1,0 +1,8 @@
+# Ignore RStudio and renv caches
+.Rproj.user
+renv/library/
+
+# Ignore git and docker files
+.git/
+.gitignore
+.dockerignore
