@@ -10,7 +10,7 @@
             "updatePackages": true
         },
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-            "packages": "dplyr,tidyr,ggplot2,TMB,here,remotes,lubridate,github::NOAA-FIMS/FIMS,github::r4ss/r4ss,Cole-Monnahan-NOAA/adnuts@sparse_M",
+            "packages": "dplyr,tidyr,ggplot2,TMB,here,remotes,lubridate,github::NOAA-FIMS/FIMS",
             "installSystemRequirements": true
         },
         "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0":{},
