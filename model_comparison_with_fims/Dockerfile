@@ -32,10 +32,14 @@ RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> "$(R RHOM
 
 # Install R packages from the 'r-packages' feature using pak
 # For VSCode R Session Watcher (from code-server): jsonlite, rlang
-RUN R -e "pak::pkg_install(c('remotes', 'here', 'r4ss', 'dplyr', 'ggplot2', 'Rcpp', 'RcppEigen', 'snowfall', 'TMB', 'tibble', 'tidyr'))"
-RUN R -e "remotes::install_github(repo = 'cmlegault/ASAPplots')"
-RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/Age_Structured_Stock_Assessment_Model_Comparison')"
-RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/FIMS', ref = '10d5103cecdf2e37b724eb15dbf66dfb146c472b')"
+#RUN R -e "pak::pkg_install(c('remotes', 'here', 'r4ss', 'dplyr', 'ggplot2', 'Rcpp', 'RcppEigen', 'snowfall', 'TMB', 'tibble', 'tidyr'))"
+#RUN R -e "remotes::install_github(repo = 'cmlegault/ASAPplots')"
+#RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/Age_Structured_Stock_Assessment_Model_Comparison')"
+#RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/FIMS', ref = '10d5103cecdf2e37b724eb15dbf66dfb146c472b')"
+RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
+
+# Restore the R environment
+RUN R -e "renv::restore()"
 
 # Install RStudio Server from the 'rstudio-server' feature
 # Check for the latest Ubuntu 22.04 (Jammy) version at https://posit.co/download/rstudio-server/
