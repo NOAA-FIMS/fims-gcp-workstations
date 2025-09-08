@@ -1,0 +1,38 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/r
+{
+    "name": "R (rocker/r-ver base)",
+    "image": "ghcr.io/rocker-org/devcontainer/r-ver:4.3",
+
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "make,gcc,g++,gdb",
+            "updatePackages": true
+        },
+        "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+            "packages": "dplyr,tidyr,ggplot2,TMB,here,remotes,lubridate,github::NOAA-FIMS/FIMS,github::r4ss/r4ss,Cole-Monnahan-NOAA/adnuts@sparse_M",
+            "installSystemRequirements": true
+        },
+        "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0":{},
+        // more info: https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/README.md
+        "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {},
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest"
+        }
+    },
+
+    "postCreateCommand": "chmod +x .devcontainer/postcommands.sh && .devcontainer/postcommands.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.codespaces",
+                "reditorsupport.r",
+                "rdebugger.r-debugger",
+                "github.vscode-pull-request-github",
+                "quarto.quarto",
+                "peakchen90.open-html-in-browser"
+            ]
+        }
+    },
+    "remoteUser": "root"
+}
