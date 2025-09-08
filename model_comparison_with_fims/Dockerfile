@@ -22,6 +22,11 @@ RUN apt-get update && \
     libclang-dev \
     curl \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+    # Dependencies for r packages (from renv)
+    libcurl4-openssl-dev  
+    libgit2-dev           
+    libxml2-dev           
+    pandoc                
     # rm -rf /var/lib/apt/lists/*
 # Install ps-tree using npm
 RUN npm install -g ps-tree
@@ -37,6 +42,14 @@ RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> "$(R RHOM
 #RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/Age_Structured_Stock_Assessment_Model_Comparison')"
 #RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/FIMS', ref = '10d5103cecdf2e37b724eb15dbf66dfb146c472b')"
 RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
+
+# Copy renv files to dockerfile (think we need this but not sure)
+RUN mkdir -p renv
+COPY app.R app.R
+COPY renv.lock renv.lock
+COPY .Rprofile  .Rprofile
+COPY renv/activate.R renv/activate.R
+COPY renv/settings.json renv/settings.json
 
 # Restore the R environment
 RUN R -e "renv::restore()"
