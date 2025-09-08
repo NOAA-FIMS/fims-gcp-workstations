@@ -13,15 +13,15 @@ if (length(pkg_to_install)) install.packages(pkg_to_install)
 
 invisible(lapply(required_pkg, library, character.only = TRUE))
 
-remotes::install_github(repo = "cmlegault/ASAPplots")
+# remotes::install_github(repo = "cmlegault/ASAPplots")
 library(ASAPplots)
-remotes::install_github(repo = "NOAA-FIMS/Age_Structured_Stock_Assessment_Model_Comparison")
+# remotes::install_github(repo = "NOAA-FIMS/Age_Structured_Stock_Assessment_Model_Comparison")
 library(ASSAMC)
 
-devtools::install_github(
-  "NOAA-FIMS/FIMS",
-  ref = "10d5103cecdf2e37b724eb15dbf66dfb146c472b"
-)
+# devtools::install_github(
+#   "NOAA-FIMS/FIMS",
+#   ref = "10d5103cecdf2e37b724eb15dbf66dfb146c472b"
+# )
 library(FIMS)
 
 # Set up C1 (sigmaR = 0.4, om_sim_num = 160) ------------------------
