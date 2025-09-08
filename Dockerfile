@@ -21,12 +21,12 @@ RUN apt-get update && \
     npm \
     libclang-dev \
     curl \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
     # Dependencies for r packages (from renv)
-    libcurl4-openssl-dev  
-    libgit2-dev           
-    libxml2-dev           
-    pandoc                
+    libcurl4-openssl-dev \  
+    libgit2-dev \           
+    libxml2-dev \           
+    pandoc \  
+    && apt-get clean && rm -rf /var/lib/apt/lists/*              
     # rm -rf /var/lib/apt/lists/*
 # Install ps-tree using npm
 RUN npm install -g ps-tree
@@ -45,11 +45,10 @@ RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org
 
 # Copy renv files to dockerfile (think we need this but not sure)
 RUN mkdir -p renv
-COPY app.R app.R
-COPY renv.lock renv.lock
-COPY .Rprofile  .Rprofile
-COPY renv/activate.R renv/activate.R
-COPY renv/settings.json renv/settings.json
+COPY ../renv.lock renv.lock
+COPY ../.Rprofile  .Rprofile
+COPY ../renv/activate.R renv/activate.R
+COPY ../renv/settings.json renv/settings.json
 
 # Restore the R environment
 RUN R -e "renv::restore()"
