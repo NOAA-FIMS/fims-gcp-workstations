@@ -35,20 +35,25 @@ RUN npm install -g ps-tree
 # This ensures R scripts and package installations can always find the CRAN mirror.
 RUN echo 'options(repos = c(CRAN = "https://cloud.r-project.org"))' >> "$(R RHOME)/etc/Rprofile.site"
 
-# Install R packages from the 'r-packages' feature using pak
+# Install renv to install R packages
 # For VSCode R Session Watcher (from code-server): jsonlite, rlang
-#RUN R -e "pak::pkg_install(c('remotes', 'here', 'r4ss', 'dplyr', 'ggplot2', 'Rcpp', 'RcppEigen', 'snowfall', 'TMB', 'tibble', 'tidyr'))"
-#RUN R -e "remotes::install_github(repo = 'cmlegault/ASAPplots')"
-#RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/Age_Structured_Stock_Assessment_Model_Comparison')"
-#RUN R -e "remotes::install_github(repo = 'NOAA-FIMS/FIMS', ref = '10d5103cecdf2e37b724eb15dbf66dfb146c472b')"
 RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
 
-# Copy renv files to dockerfile (think we need this but not sure)
+# Copy renv files to dockerfile 
 RUN mkdir -p renv
-COPY ../renv.lock renv.lock
-COPY ../.Rprofile  .Rprofile
-COPY ../renv/activate.R renv/activate.R
-COPY ../renv/settings.json renv/settings.json
+COPY renv.lock renv.lock
+COPY .Rprofile  .Rprofile
+COPY renv/activate.R renv/activate.R
+COPY renv/settings.json renv/settings.json
+
+# After copying renv files, add this line to make a working directory that won't be overwritten:
+WORKDIR /workspaces/model-comparison-project
+
+# Copy renv files to the working directory
+COPY renv.lock ./
+COPY .Rprofile ./
+COPY renv/activate.R renv/
+COPY renv/settings.json renv/
 
 # Restore the R environment
 RUN R -e "renv::restore()"

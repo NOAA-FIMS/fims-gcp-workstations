@@ -15,7 +15,9 @@ services:
     # Mount the current directory on your host to /workspaces/model-comparison-project in the container.
     # This allows you to edit files locally and have the changes reflected inside the container.
     volumes:
-      - .:/workspaces/model-comparison-project
+        # Mount only the directories you need to edit
+       - ./model_comparison_with_fims:/workspaces/model-comparison-project/model_comparison_with_fims
+      # Don't mount renv/, .Rprofile, or renv.lock
       
     # Set the default working directory for the container
     working_dir: /workspaces/model-comparison-project
