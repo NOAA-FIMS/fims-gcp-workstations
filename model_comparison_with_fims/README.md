@@ -56,3 +56,60 @@ xdg-open http://localhost:8080
 ```Bash
 docker compose down
 ```
+
+### Meg's workflow with Posit Standard VS code set up
+
+1. Open a terminal and clone this project to your Google Cloud workstation, then navigate into the project directory.
+
+```Bash
+git clone NOAA-FIMS/fims-gcp-workstations
+#switch to the add renv branch
+git checkout dev-add-renv 
+```
+
+2. Build and start the container
+
+```Bash
+docker compose up -d --build
+```
+
+3. Once the container has been built, open it using: 
+
+```Bash
+docker exec -it r_dev_container bash
+```
+If you see 
+
+```Bash
+root ➜ /workspaces/model-comparison-project $ 
+```
+in the terminal, then you are inside the container. To open an R session type 
+
+```Bash
+R
+```
+into the terminal. 
+
+4. To quit R and exit the container, use 
+
+```R
+q()
+```
+and 
+```Bash
+exit
+```
+To know you are out of the container you should see 
+```Bash
+user@w-megumioshima-mfbjkwzo:~/fims-gcp-workstations$ 
+``` 
+in the terminal. 
+
+5. To delete the container and rebuild, stop the container then remove the container and the cache: 
+
+```Bash
+docker stop r_dev_container
+docker rm r_dev_container
+docker builder prune --all
+```
+
