@@ -1,17 +1,17 @@
 # Install required packages ---------------------------------------
-required_pkg <- c(
-  "remotes", "devtools", "here",
-  "rstudioapi", "gdata", "PBSadmb",
-  "stringr", "matrixcalc", "r4ss",
-  "readxl", "scales", "corrplot",
-  "glue", "parallel", "doParallel",
-  "RcppEigen", "TMB"
-)
-pkg_to_install <- required_pkg[!(required_pkg %in%
-  installed.packages()[, "Package"])]
-if (length(pkg_to_install)) install.packages(pkg_to_install)
+# required_pkg <- c(
+#   "remotes", "devtools", "here",
+#   "rstudioapi", "gdata", "PBSadmb",
+#   "stringr", "matrixcalc", "r4ss",
+#   "readxl", "scales", "corrplot",
+#   "glue", "parallel", "doParallel",
+#   "RcppEigen", "TMB"
+# )
+# pkg_to_install <- required_pkg[!(required_pkg %in%
+#   installed.packages()[, "Package"])]
+# if (length(pkg_to_install)) install.packages(pkg_to_install)
 
-invisible(lapply(required_pkg, library, character.only = TRUE))
+# invisible(lapply(required_pkg, library, character.only = TRUE))
 
 # remotes::install_github(repo = "cmlegault/ASAPplots")
 library(ASAPplots)
@@ -26,7 +26,7 @@ library(FIMS)
 
 # Set up C1 (sigmaR = 0.4, om_sim_num = 160) ------------------------
 
-maindir <- file.path(here::here(), "data")
+maindir <- file.path(here::here(), "model_comparison_with_fims", "data")
 model_input <- ASSAMC::save_initial_input()
 C1 <- ASSAMC::save_initial_input(
   base_case = TRUE,
