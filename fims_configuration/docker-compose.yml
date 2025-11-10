@@ -1,0 +1,22 @@
+# docker-compose.yml
+# This file defines a service to run the development environment.
+# It uses the Dockerfile to build the image, mounts the current project
+# directory into the container, and keeps the container running.
+# Run `docker compose --progress=plain build` before `docker compose up -d`
+# to force the builder to show all output, so we can see the formatted message
+# in Dockerfile.
+
+services:
+  fims-r-dev:
+    # Tell Docker Compose to build the image from the Dockerfile
+    # in the current directory (.)
+    build: .
+    container_name: fims_r_container
+    
+    # Mount the current directory on the host to /workspaces/fims_configuration in the container.
+    # This allows users to edit files locally and have the changes reflected inside the container.
+    volumes:
+      - .:/workspaces/fims_configuration
+      
+    # Set the default working directory for the container
+    working_dir: /workspaces/fims_configuration
