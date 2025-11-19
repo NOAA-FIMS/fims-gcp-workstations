@@ -25,8 +25,8 @@ RUN apt-get update && \
 # - NOAA-FIMS/FIMSdiags (currently cannot be installed because lazy loading failed)
 # - NOAA-FIMS/fishprior (take > 40 mins to install the package)
 
-RUN R -e "install.packages('pak', repos = 'https://cloud.r-project.org')"
-RUN R -e "pak::pkg_install(c( \
+RUN R -e "install.packages('pak', repos = 'https://cloud.r-project.org'); \
+    pak::pkg_install(c( \
         'languageserver', \
         'NOAA-FIMS/FIMS', \
         'nmfs-ost/asar', \
