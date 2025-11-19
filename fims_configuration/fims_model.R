@@ -140,3 +140,5 @@ stockplotr::plot_timeseries(
   ylab = "natural log of Fishing Mortality"
 ) +
   stockplotr::theme_noaa()
+
+ggplot2::ggsave(filename = "ts_plot.png")
