@@ -4,7 +4,7 @@
 # mkdir -p ~/R/bai-li-library/4.4
 # echo 'R_LIBS_USER="~/R/bai-li-library/4.4"' >> ~/.Renviron
 
-# install.packages("FIMS", repos = c("https://noaa-fims.r-universe.dev", "https://cloud.r-project.org"))
+# install.packages("FIMS", repos = c("https://noaa-fisheries-integrated-toolbox.r-universe.dev", "https://cloud.r-project.org"))
 devtools::install_github(
   "NOAA-FIMS/FIMS",
   ref = "2338d23eda72676ba3ac79dc8007ecec600979a6"
